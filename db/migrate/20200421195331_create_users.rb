@@ -14,6 +14,8 @@ class CreateUsers < ActiveRecord::Migration[6.0]
       t.boolean :asexual
       t.string :house
       t.string :favorite_spell
+      t.string :username
+      t.string :password_digest
 
       t.timestamps
     end
