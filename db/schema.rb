@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_205352) do
     t.string "house"
     t.string "favorite_spell"
     t.string "username"
+    t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
