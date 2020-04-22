@@ -40,7 +40,7 @@ char_array.each { |character|
         asexual: acebooleans.sample,
         favorite_spell: Faker::Movies::HarryPotter.spell,
         username: character["name"].split(" ")[0].downcase,
-        password: "hi"
+        password: "hi",
     )
 }
 

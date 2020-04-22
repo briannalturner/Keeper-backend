@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_205352) do
     t.boolean "likes_men"
     t.boolean "likes_other"
     t.boolean "asexual"
-    t.string "house"
+    t.string "house", default: "Graduated"
     t.string "favorite_spell"
     t.string "username"
     t.string "email"
