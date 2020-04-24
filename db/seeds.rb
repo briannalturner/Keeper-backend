@@ -24,9 +24,16 @@ booleans = [true, false]
 acebooleans = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true]
 
 char_array.each { |character|
+    if (character["name"].split(" ")[0] === character["name"].split(" ")[-1])
+        firstName = character["name"].split(" ")[0]
+        lastName = ""
+    else
+        firstName = character["name"].split(" ")[0]
+        lastName = character["name"].split(" ")[-1]
+    end
     User.create!(
-        first_name: character["name"].split(" ")[0],
-        last_name: character["name"].split(" ")[-1],
+        first_name: firstName,
+        last_name: lastName,
         bio: Faker::Movies::HarryPotter.quote,
         email: "#{character["name"].split(" ")[0].downcase}@gmail.com",
         year: years.sample,

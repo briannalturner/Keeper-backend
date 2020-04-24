@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
     def create
         user = User.new(user_params)
+        user.password = params[:password]
         if user.valid?
             user.save
             render json: user
@@ -23,6 +24,6 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :bio, :year, :gender, :orientation, :birthdate, :likes_women, :likes_men, :likes_other, :asexual, :house, :favorite_spell, :image, :username, :password)
+        params.require(:user).permit(:first_name, :last_name, :bio, :year, :gender, :orientation, :birthdate, :likes_women, :likes_men, :likes_other, :asexual, :house, :favorite_spell, :image, :username)
     end
 end

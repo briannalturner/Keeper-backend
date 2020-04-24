@@ -1,5 +1,4 @@
 class User < ApplicationRecord
-    has_one_attached :image
     has_secure_password
     has_many :liked_users, foreign_key: :liker_id, class_name: 'Like'
     has_many :likees, through: :liked_users
