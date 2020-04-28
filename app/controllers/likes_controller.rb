@@ -16,14 +16,14 @@ class LikesController < ApplicationController
             like.save
             render json: like
         else
-            render json: {message: "save failed", errors: like.errors}
+            render json: {message: "save failed", errors: like.errors, like: like}
         end
     end
 
     private
 
     def like_params
-        params.require(:like).permit(:liker, :likee)
+        params.require(:like).permit(:liker_id, :likee_id)
     end
     
 end

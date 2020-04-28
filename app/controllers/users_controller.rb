@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def show
         user = User.find(params[:id])
-        render json: user
+        render json: user, include: [:likees => {:only => [:id]}, :recievers => {:only => [:id]}, :senders => {:only => [:id]}]
     end
 
     def create
@@ -20,6 +20,13 @@ class UsersController < ApplicationController
             render json: {message: "invalid user", errors: user.errors}
         end
 
+    end
+
+    def profile
+        token = request.headers["Authentication"]
+        payload = decode(token)
+        user = User.find_by(id: payload["user_id"])
+        render json: user, include: [:likees => {:only => [:id]}]
     end
 
     private

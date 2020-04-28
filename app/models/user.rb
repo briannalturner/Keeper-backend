@@ -5,8 +5,8 @@ class User < ApplicationRecord
     has_many :liked_by_users, foreign_key: :likee_id, class_name: 'Like'
     has_many :likers, through: :liked_by_users
     
-    has_many :sent, foreign_key: :recipient_id, class_name: 'Message'
-    has_many :sent_messages, through: :sent
-    has_many :recieved, foreign_key: :sent_id, class_name: 'Message'
-    has_many :recieved_messages, through: :recieved
+    has_many :sending_users, foreign_key: :recipient_id, class_name: 'Message'
+    has_many :senders, through: :sending_users
+    has_many :recieving_users, foreign_key: :sender_id, class_name: 'Message'
+    has_many :recipients, through: :recieving_users
 end

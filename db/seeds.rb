@@ -23,6 +23,7 @@ birthyears = [1990,1991,1992,1993,1994,1995,1996,1997,1998,1999]
 booleans = [true, false]
 acebooleans = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true]
 
+
 char_array.each { |character|
     if (character["name"].split(" ")[0] === character["name"].split(" ")[-1])
         firstName = character["name"].split(" ")[0]
@@ -31,6 +32,8 @@ char_array.each { |character|
         firstName = character["name"].split(" ")[0]
         lastName = character["name"].split(" ")[-1]
     end
+
+
     User.create!(
         first_name: firstName,
         last_name: lastName,
@@ -47,7 +50,7 @@ char_array.each { |character|
         asexual: acebooleans.sample,
         favorite_spell: Faker::Movies::HarryPotter.spell,
         username: character["name"].split(" ")[0].downcase,
-        password: "hi",
+        password: "hi"
     )
 }
 
