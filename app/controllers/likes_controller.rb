@@ -20,6 +20,12 @@ class LikesController < ApplicationController
         end
     end
 
+    def delete
+        like = Like.find_by(likee_id: params["likee_id"], liker_id: params["liker_id"])
+        like.delete
+        render json: {message: "like deleted"}
+    end
+
     private
 
     def like_params

@@ -26,7 +26,13 @@ class UsersController < ApplicationController
         token = request.headers["Authentication"]
         payload = decode(token)
         user = User.find_by(id: payload["user_id"])
-        render json: user, include: [:likees => {:only => [:id]}]
+        matches = []
+        user.likees.each{ |likee|
+            matches = user.likers.select { |liker|
+                liker === likee
+            }
+        }
+        render json: { user_data: user, matches: matches, likees: user.likees }
     end
 
     private
