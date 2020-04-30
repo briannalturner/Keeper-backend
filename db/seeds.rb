@@ -11,7 +11,7 @@ require 'faker'
 
 User.destroy_all
 Like.destroy_all
-Message.destroy_all
+Room.destroy_all
 
 key = '$2a$10$wklcGoUJPej.gAu.F0jQwehCv1X/4Xv6ok4BK4vQRYOxIC1rnnkLi'
 characters = RestClient.get "https://www.potterapi.com/v1/characters?key=#{key}"
@@ -56,8 +56,18 @@ char_array.each { |character|
 
 users = User.all
 users.each { |user|
-    Like.create!(liker: users.sample, likee: user)
-    Like.create!(liker: user, likee: users.sample)
+    user2 = users.sample
+    Like.create!(liker: user2, likee: user)
+    Like.create!(liker: user, likee: user2)
+    user3 = users.sample
+    Like.create!(liker: user3, likee: user)
+    Like.create!(liker: user, likee: user3)
+    room1 = Room.create!(user_one: user, user_two: user2)
+    room2 = Room.create!(user_one: user3, user_two: user)
+    RoomMessage.create!(room: room1, user: user, message: "Are you sure you’re a muggle cause I’d swear that ass is magical!")
+    RoomMessage.create!(room: room1, user: user2, message: "Wanna go manage some mischief together? I solemnly swear I’m up to no good.")
+    RoomMessage.create!(room: room2, user: user, message: "Are you sure you’re not a Dementor? Because I’m sure I’d die if you kissed me.")
+    RoomMessage.create!(room: room2, user: user3, message: "Did you order some Felix Felicis? Cause you’re about to get lucky!")
 }
 
 # byebug

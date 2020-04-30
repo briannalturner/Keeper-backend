@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def show
         user = User.find(params[:id])
-        render json: user, include: [:likees => {:only => [:id]}, :recievers => {:only => [:id]}, :senders => {:only => [:id]}]
+        render json: user, include: [:likees => {:only => [:id]}, :messages => {:only => [:content]}, :senders => {:only => [:id]}]
     end
 
     def create
@@ -32,7 +32,17 @@ class UsersController < ApplicationController
                 liker === likee
             }
         }
-        render json: { user_data: user, matches: matches, likees: user.likees }
+        rooms = []
+        Room.where(user_two_id: user.id).each{ |room|
+            # byebug
+            roomObj = {id: room.id, recipient: room.user_one, messages: room.room_messages}
+            rooms << roomObj
+        }
+        Room.where(user_one_id: user.id).each{ |room|
+            roomObj = {id: room.id, recipient: room.user_two, messages: room.room_messages}
+            rooms << roomObj
+        }
+        render json: { user_data: user, matches: matches, likees: user.likees, rooms: rooms }
     end
 
     private
