@@ -22,6 +22,12 @@ class UsersController < ApplicationController
 
     end
 
+    def update
+        user = User.find(params[:id])
+        # user.update()
+        byebug
+    end
+
     def profile
         token = request.headers["Authentication"]
         payload = decode(token)
