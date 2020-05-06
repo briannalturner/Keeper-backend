@@ -2,7 +2,7 @@ class RoomMessagesController < ApplicationController
 
     def index
         messages = RoomMessage.all
-        render json: messages
+        render json: messages, include: [:user => {:only => [:id]}]
     end
 
     def create
@@ -16,7 +16,7 @@ class RoomMessagesController < ApplicationController
             # room_message.save
             # byebug
             RoomsChannel.broadcast_to(room, {
-                room: RoomSerializer.new(room),
+                room: room,
                 users: users,
                 messages: room.room_messages
             })

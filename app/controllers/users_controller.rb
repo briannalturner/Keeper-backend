@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
     def show
         user = User.find(params[:id])
-        render json: user, include: [:likees => {:only => [:id]}, :messages => {:only => [:content]}, :senders => {:only => [:id]}]
+        render json: user, include: [:likees => {:only => [:id]}]
     end
 
     def create
