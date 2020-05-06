@@ -4,11 +4,17 @@ class RoomsChannel < ApplicationCable::Channel
         # byebug
         @room = Room.find_by(id: params[:room])
 
-        stream_for @room
+        stream_from "rooms_#{@room.id}"
     end
 
     def recieved(data)
-        RoomsChannel.broadcast_to(@room, {room: @room, users: @room.users, messages: @room.messages})
+        @room = Room.find_by(id: params[:room])
+
+        users = []
+        users << @room.user_one
+        users << @room.user_two
+        byebug
+        RoomsChannel.broadcast_to("rooms_#{@room.id}", {room: @room, users: users, messages: @room.room_messages})
     end
 
     def unsubscribed

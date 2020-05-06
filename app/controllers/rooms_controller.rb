@@ -6,10 +6,13 @@ class RoomsController < ApplicationController
     end
 
     def show
-        # byebug
         room = Room.find(params[:id])
         # byebug
-        render json: room, include: [:room_messages]
+        users = []
+        users << room.user_one
+        users << room.user_two
+        messages = room.room_messages
+        render json: {room: room, users: users, messages: messages}
     end
     
 end

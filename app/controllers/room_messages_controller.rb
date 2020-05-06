@@ -8,14 +8,19 @@ class RoomMessagesController < ApplicationController
     def create
         room_message = RoomMessage.new(message_params)
         room = Room.find(params[:room_id])
-        if room_message
-            room_message.save
+        users = []
+        users << room.user_one
+        users << room.user_two
+        # byebug
+        if room_message.save
+            # room_message.save
+            # byebug
             RoomsChannel.broadcast_to(room, {
                 room: RoomSerializer.new(room),
-                users: UserSerializer.new(room.users),
-                messages: MessageSerializer.new(room.messages)
+                users: users,
+                messages: room.room_messages
             })
-            render json: MessageSerializer.new(room_message)
+            render json: room_message
         else
             render json: {message: "save failed", errors: room_message.errors}
         end
