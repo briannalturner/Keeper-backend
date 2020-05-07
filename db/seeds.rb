@@ -9,10 +9,10 @@ require 'faker'
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+RoomMessage.destroy_all
 User.destroy_all
 Like.destroy_all
 Room.destroy_all
-RoomMessage.destroy_all
 
 key = '$2a$10$wklcGoUJPej.gAu.F0jQwehCv1X/4Xv6ok4BK4vQRYOxIC1rnnkLi'
 characters = RestClient.get "https://www.potterapi.com/v1/characters?key=#{key}"
@@ -23,7 +23,32 @@ orientations = ["straight", "gay", "bisexual", "pansexual", "questioning"]
 birthyears = [1990,1991,1992,1993,1994,1995,1996,1997,1998,1999]
 booleans = [true, false]
 acebooleans = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true]
+bio1 = "Sunday fundays > lazy Sundays
+Skiing > snowboarding
+Electric guitar < acoustic guitar (but I play both)
 
+Peanut butter > jelly (Though, they still go together pretty well. Maybe we will too.)"
+bio2 = "Grew up in the Portland, Oregon area. Survived middle school by becoming a skater kid (still haven’t grown out of it). Now I’m trying to pay my rent, play my music, and make my way.
+
+Looking forward to going to Brazil in the fall. If you have any tips on what I should see, definitely let me know."
+bio3 = "My patronus is a black and white cat. I was hoping for something noble like a lion or stag. Heck, a llama, even. Nope. I got a housecat. If you take the Pottermore quiz and get a dog or a mouse or something like that, feel free to message me. J.K. Rowling is trying to tell us something."
+bio4 = "You should message me if
+You’re looking for something serious. I’ve done the short-term dating thing and no knock on it, but it’s not for me. I’m looking for a genuine connection with someone that thinks it’s okay to (occasionally) eat dinner after midnight. Open to dinner suggestions~"
+bio5 = "Dolphins. Can’t trust ’em. Never have. Never will."
+bio6 = "I’m A fun-loving guy who’s a happy dog-dad to my pup Tito. My friends would probably describe me as goofy but somehow I always end up being the responsible one. I do a lot on the weekend. I like to work on cars, BBQ with my friends, catch a local band (that I’ve probably never heard of but by my second beer I won’t really care as long as they bring it). If you don’t mind the dog or a little bit of a goof we could be a pretty good pair."
+bio7 = "I am the hairdresser you're looking for.
+
+To only the best people out there,
+
+I'm an energetic kinda woman, who likes nothing more than knitting with the right person, and socialising with my good mate, Margaret Thatcher, who admires my generous qualities.
+
+The first thing people usually notice about me is my understanding personality, closly followed by my smashing elbows. I can be a jerk when I don't know people well - with body parts like my elbows and my toenails, I can afford to be."
+bio8 = "If you're the right person for me, you'll be hilarious and gentle. You won't be afraid to be open and honest and will have a healthy respect for the environment.
+
+My ideal date would involve socialising in Australia with a curvy person by my side. While we're there, I evaluate your grubby moles, checking that you're up to my understandably high standards.
+
+People only get one chance with me. For every person who displeases me, there are another 111 waiting in the wings to replace you."
+bios = [bio1, bio2, bio3, bio4, bio5, bio6, bio7, bio8]
 
 char_array.each { |character|
     if (character["name"].split(" ")[0] === character["name"].split(" ")[-1])
@@ -49,7 +74,7 @@ char_array.each { |character|
     User.create!(
         first_name: firstName,
         last_name: lastName,
-        bio: Faker::Quotes::Shakespeare.romeo_and_juliet_quote,
+        bio: bios.sample,
         email: "#{character["name"].split(" ")[0].downcase}@gmail.com",
         year: years.sample,
         house: character["house"],
