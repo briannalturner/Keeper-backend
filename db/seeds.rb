@@ -49,7 +49,7 @@ char_array.each { |character|
     User.create!(
         first_name: firstName,
         last_name: lastName,
-        bio: Faker::Movies::HarryPotter.quote,
+        bio: Faker::Quotes::Shakespeare.romeo_and_juliet_quote,
         email: "#{character["name"].split(" ")[0].downcase}@gmail.com",
         year: years.sample,
         house: character["house"],
