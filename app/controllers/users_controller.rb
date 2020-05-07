@@ -34,8 +34,10 @@ class UsersController < ApplicationController
         user = User.find_by(id: payload["user_id"])
         matches = []
         user.likees.each{ |likee|
-            matches = user.likers.select { |liker|
-                liker === likee
+            user.likers.each { |liker|
+                if liker === likee
+                    matches << liker
+                end
             }
         }
         rooms = []
@@ -48,7 +50,7 @@ class UsersController < ApplicationController
             roomObj = {id: room.id, recipient: room.user_two, messages: room.room_messages}
             rooms << roomObj
         }
-        render json: { user_data: user, matches: matches, likees: user.likees, rooms: rooms }
+        render json: { user_data: user, matches: matches, likees: user.likees, likers: user.likers, rooms: rooms }
     end
 
     private
