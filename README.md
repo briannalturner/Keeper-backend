@@ -1,25 +1,14 @@
 # README
+Keeper - Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Keeper is a full stack dating app for Harry Potter enthusiasts. Seeded with a public Harry Potter API, 
+Keeper features randomly generated profiles for each character in the Harry Potter series.
 
-Things you may want to cover:
+Users can create edit and delete their profile, browse other profiles, chat in real-time with other users 
+and like or match with other users.
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-# Hogwarts_Dating_Backend
+Technology Used:
+- WebSockets are used for the real-time chat feature.
+- Bootstrap is used for the styling, along with some custom CSS.
+- JavaScript/React for frontend and Ruby/Rails for backend
